@@ -76,7 +76,7 @@
 
     function addContact(data) {
 		
-        var htmlContent = "<a  href='tel:"+data.number+"' class='contact'>";
+        var htmlContent = "<a  href='tel://"+data.number+"' class='contact'>";
         if(data.icon) {
           htmlContent += "<div class='icon'><img src='"+data.icon+"'></img></div>";
         }
