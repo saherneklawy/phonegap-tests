@@ -171,7 +171,7 @@
 				
 			</a>
 			 <div id="container">
-			  loading ...
+			  about the app ...
 			 </div>
 		 </div>
 	 </div>
@@ -183,41 +183,5 @@
 	$('.sidebar').toggleClass('isClosed');
   });
 	
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyBOXQ22MfCmt9Qw3eKMEZRCxvRdyri5Fio",
-        authDomain: "emergency-caller-d7986.firebaseapp.com",
-        databaseURL: "https://emergency-caller-d7986.firebaseio.com",
-        projectId: "emergency-caller-d7986",
-        storageBucket: "",
-        messagingSenderId: "69531443609"
-      };
-    firebase.initializeApp(config);
-    var db = firebase.firestore();
-
-    function addContact(data) {
-		
-        var htmlContent = "<a  href='tel://"+data.number+"' class='contact'>";
-        if(data.icon) {
-          htmlContent += "<div class='icon'><img src='"+data.icon+"'></img></div>";
-        }
-        htmlContent += "<div class='name'>"+data.name+"</div>" + 
-          "<div class='number'><div><i class='fas fa-phone'></i>&nbsp;"+data.number_arabic+"</div></div>" + 
-        "</a>";
-        $('#container').append(htmlContent);
-    }
-
-    db.collection("contact").orderBy("priority", "asc").get().then(handleDataRead);
-    function handleDataRead(objects) {
-	    $('#container').html("");
-        var n = objects.size;
-        var i = 0;
-        while(i < n) {
-            var id = objects.docs[i].id;
-            var data = objects.docs[i].data();
-            addContact(data);
-            i = i + 1;
-        }
-    }
     </script>
     </html>
