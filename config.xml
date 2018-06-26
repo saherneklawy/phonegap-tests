@@ -10,6 +10,8 @@
     <content src="index.html" />
     <access origin="*" />
 	<icon src="emergency-icon.png" />
+	
+	<plugin name="cordova-plugin-whitelist" version="1" />
 	<allow-navigation href="*" />
 	<allow-intent href="*" />
 </widget>
