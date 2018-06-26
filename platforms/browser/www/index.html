@@ -25,7 +25,7 @@
             }
 
             .contact {
-                width: 40%;
+                width: 100%;
                 border: 1px solid black;
                 padding: 20px;
                 margin: 10px;
@@ -58,7 +58,7 @@
     </head>
     <body>
      <div id="container">
-
+	  loading ...
      </div>
     </body>
     <script>
@@ -75,6 +75,7 @@
     var db = firebase.firestore();
 
     function addContact(data) {
+		
         var htmlContent = "<a  href='tel:"+data.number+"' class='contact'>";
         if(data.icon) {
           htmlContent += "<div class='icon'><img src='"+data.icon+"'></img></div>";
@@ -87,6 +88,7 @@
 
     db.collection("contact").orderBy("priority", "asc").get().then(handleDataRead);
     function handleDataRead(objects) {
+	    $('#container').html("");
         var n = objects.size;
         var i = 0;
         while(i < n) {
