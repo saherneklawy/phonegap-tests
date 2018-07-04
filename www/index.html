@@ -1,0 +1,51 @@
+<html>
+    <head>
+      <style>
+        img {
+          width: 50%
+        }
+      </style>
+      <script type="text/javascript" src="cordova.js"></script>
+
+
+        <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+        <script
+        src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
+
+        <script src='jquery-3.3.1.js'></script>
+    </head>
+    <body>
+        <button id="gps">get GPS</button>
+    </body>
+    <script>
+      var config = {
+          apiKey: "AIzaSyAcrUD5uhlB7yuaDB3bNNBFc5zHruTXmA0",
+          authDomain: "tamkeen-database-starter.firebaseapp.com",
+          databaseURL: "https://tamkeen-database-starter.firebaseio.com",
+          projectId: "tamkeen-database-starter",
+          storageBucket: "tamkeen-database-starter.appspot.com",
+          messagingSenderId: "265951754171"
+        };
+      firebase.initializeApp(config);
+      document.addEventListener("deviceready", onDeviceReady, false);
+
+      function onDeviceReady() {
+        $('body').append("device ready");
+        navigator.geolocation.watchPosition(geolocationSuccess,
+          onFail, {timeout: 5000,  enableHighAccuracy: true});
+      }
+
+      $("#gps").click(handleClick);
+      function handleClick() {
+        navigator.geolocation.watchPosition(geolocationSuccess,
+          onFail, {timeout: 2000,  enableHighAccuracy: true});
+      }
+      function geolocationSuccess(gpsData) {
+        $("body").append(JSON.stringify(gpsData));
+      }
+
+      function onFail() {
+        alert("please try again");
+      }
+    </script>
+</html>
