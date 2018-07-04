@@ -1,0 +1,68 @@
+<html>
+    <head>
+      <style>
+        img {
+          width: 50%
+        }
+      </style>
+      <script type="text/javascript" src="cordova.js"></script>
+
+
+        <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+        <script
+        src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
+
+        <script src='jquery-3.3.1.js'></script>
+    </head>
+    <body>
+        <a href="index.html">go back to images</a>
+        <br></br>
+
+        <button id="camera">capture image</button>
+    </body>
+    <script>
+      var config = {
+          apiKey: "AIzaSyAcrUD5uhlB7yuaDB3bNNBFc5zHruTXmA0",
+          authDomain: "tamkeen-database-starter.firebaseapp.com",
+          databaseURL: "https://tamkeen-database-starter.firebaseio.com",
+          projectId: "tamkeen-database-starter",
+          storageBucket: "tamkeen-database-starter.appspot.com",
+          messagingSenderId: "265951754171"
+        };
+      firebase.initializeApp(config);
+
+      $("#camera").click(handleClick);
+      function handleClick() {
+        navigator.camera.getPicture(onPhotoFileSuccess, onFail, { destinationType: Camera.DestinationType.DATA_URL });
+      }
+      function onPhotoFileSuccess(imageData) {
+        var imageData = "data:image/jpeg;base64," + imageData;
+
+        $("body").append("<img src="+imageData+"></img>");
+
+        var time = new Date();
+        var storageRef = firebase.storage().ref(time+"");
+
+        var uploadTask = storageRef.putString(imageData, 'data_url');
+
+        uploadTask.then(handleFinish);
+      }
+
+      function onFail() {
+        alert("please try again");
+      }
+
+      function handleFinish(snapshot) {
+          $("#loader").hide();
+          snapshot.ref.getDownloadURL().then(handleDownloadUrl); 
+      }
+
+      var db = firebase.firestore();
+
+      function handleDownloadUrl(url) {
+          alert(url);
+          var object = {url: url};
+          db.collection("images").add(object);
+      }
+    </script>
+</html>

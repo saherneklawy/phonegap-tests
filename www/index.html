@@ -1,0 +1,55 @@
+<html>
+        <head>
+            <style>
+                .img {
+                    width: 200px;
+                    display: block;
+                }
+            </style>
+        <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+        <script
+        src="https://www.gstatic.com/firebasejs/4.12.0/firebase-firestore.js"></script>
+        <script src="jquery-3.3.1.js" type="text/javascript">
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=Cairo|Roboto"
+        rel="stylesheet" type="text/css" />
+        </head>
+        <body>
+          <a href="upload-image.html">upload image</a>
+          <br></br>
+          <a href="camera-image.html">camera image</a>
+          <div id="loader">loading ....</div>
+        </body>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAcrUD5uhlB7yuaDB3bNNBFc5zHruTXmA0",
+            authDomain: "tamkeen-database-starter.firebaseapp.com",
+            databaseURL: "https://tamkeen-database-starter.firebaseio.com",
+            projectId: "tamkeen-database-starter",
+            storageBucket: "tamkeen-database-starter.appspot.com",
+            messagingSenderId: "265951754171"
+        };
+        firebase.initializeApp(config);
+        var db = firebase.firestore();
+
+
+        var db = firebase.firestore();
+        db.collection("images").get().then(handleDataRead);
+        function handleDataRead(objects) {
+        var n = objects.size;
+        var i = 0;
+        while(i < n) {
+        var id = objects.docs[i].id;
+        var data = objects.docs[i].data();
+
+        var z = "<img class='img' src="+data.url+"></img>";
+        $("body").append(z);
+
+        i = i + 1;
+        }
+          $("#loader").hide();
+        }
+
+        </script>
+        </html>
