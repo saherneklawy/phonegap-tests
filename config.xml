@@ -8,8 +8,6 @@
         PhoneGap Team
     </author>
     <content src="index.html" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="14" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -35,5 +33,8 @@
     <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
     <plugin name="cordova-plugin-network-information" spec="~1.3.3" />
     <plugin name="cordova-plugin-vibration" spec="~2.1.5" />
-    <engine name="android" spec="~7.0.0" />
+
+    <plugin name="cordova-plugin-whitelist" version="1" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
 </widget>
